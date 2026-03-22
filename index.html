@@ -632,9 +632,11 @@
 
   .ai-chat-messages{
     display:flex;flex-direction:column;gap:8px;
-    max-height:120px;overflow-y:auto;
+    max-height:120px;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;
     padding:4px 0;
   }
+
+  .ai-chat-messages::-webkit-scrollbar{display:none}
 
   .chat-bubble{
     max-width:80%;padding:8px 12px;
