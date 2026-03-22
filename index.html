@@ -638,18 +638,17 @@
 
   .ai-chat-messages::-webkit-scrollbar{display:none}
 
+  .ai-chat-messages{
+    scroll-behavior:smooth;
+    overscroll-behavior:contain;
+  }
+
   .chat-bubble{
     max-width:80%;padding:8px 12px;
     border-radius:12px;
     font-size:11.5px;font-weight:300;
     line-height:1.5;letter-spacing:0.2px;
-    animation:chatFadeIn 0.25s cubic-bezier(0.2,0.6,0.4,1) both;
-    will-change:opacity,transform;
-  }
-
-  @keyframes chatFadeIn{
-    from{opacity:0;transform:translate3d(0,8px,0)}
-    to{opacity:1;transform:translate3d(0,0,0)}
+    opacity:1;
   }
 
   .chat-bubble.assistant{
@@ -1328,9 +1327,7 @@
     bubble.className = 'chat-bubble user';
     bubble.textContent = text;
     chatMessages.appendChild(bubble);
-    requestAnimationFrame(() => {
-      bubble.scrollIntoView({behavior:'smooth',block:'end'});
-    });
+    chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
   chatSend.addEventListener('click', sendMessage);
