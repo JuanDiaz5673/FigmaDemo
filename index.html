@@ -1128,8 +1128,8 @@
           <div class="chat-bubble assistant" data-i18n="chat3">You have 12 tasks this week — 3 are high priority. Your next deadline is the Design Brief review on Wednesday.</div>
         </div>
         <div class="ai-chat-input">
-          <input type="text" placeholder="Ask Bloom anything..." disabled>
-          <button class="ai-chat-send" disabled>
+          <input type="text" placeholder="Ask Bloom anything...">
+          <button class="ai-chat-send">
             <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
         </div>
@@ -1307,6 +1307,27 @@
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+
+  // ─── Chat Send ───
+  const chatInput = document.querySelector('.ai-chat-input input');
+  const chatSend = document.querySelector('.ai-chat-send');
+  const chatMessages = document.querySelector('.ai-chat-messages');
+
+  function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble user';
+    bubble.textContent = text;
+    chatMessages.appendChild(bubble);
+    chatInput.value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  chatSend.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
   });
 </script>
 </body>
